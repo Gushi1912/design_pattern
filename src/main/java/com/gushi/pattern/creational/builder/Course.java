@@ -18,39 +18,53 @@ public class Course {
 
     private String courseArticle;
 
-    public static class CourseActualBuilder extends CourseBuilder {
+    public Course (CourseBuilder courseBuilder) {
+        this.courseName = courseBuilder.courseName;
+        this.courseVideo = courseBuilder.courseVideo;
+        this.courseArticle = courseBuilder.courseArticle;
+        this.coursePPT = courseBuilder.coursePPT;
+        this.courseQA = courseBuilder.courseQA;
+    }
 
-         x
+    public static class CourseBuilder{
+        private String courseName;
 
-        @Override
+        private byte[] courseVideo;
+
+        private byte[] coursePPT;
+
+        private String courseQA;
+
+        private String courseArticle;
+
+
         public CourseBuilder buildCourseName(String courseName) {
-
-            return null;
+            this.courseName = courseName;
+            return this;
         }
 
-        @Override
         public CourseBuilder buildCourseVideo(byte[] courseVideo) {
-            return null;
+            this.courseVideo = courseVideo;
+            return this;
         }
 
-        @Override
         public CourseBuilder buildCoursePPT(byte[] coursePPT) {
-            return null;
+            this.coursePPT = coursePPT;
+            return this;
         }
 
-        @Override
         public CourseBuilder buildCourseQA(String courseQA) {
-            return null;
+            this.courseQA = courseQA;
+            return this;
         }
 
-        @Override
         public CourseBuilder buildCourseArticle(String courseArticle) {
-            return null;
+            this.courseArticle = courseArticle;
+            return this;
         }
 
-        @Override
         public Course makeCourse() {
-            return null;
+            return new Course(this);
         }
     }
 
