@@ -1,7 +1,6 @@
 package com.gushi.geekbang.metrics.storage;
 
-import com.alibaba.fastjson2.JSON;
-import com.gushi.common.RedisUtil;
+import com.gushi.common.util.RedisUtil;
 import com.gushi.geekbang.metrics.domain.RequestInfo;
 
 import java.util.List;
@@ -15,6 +14,10 @@ import java.util.Map;
 public class RedisMetricsStorage implements IMetricsStorage{
 
     private RedisUtil redisUtil;
+
+    public RedisMetricsStorage() {
+        redisUtil = new RedisUtil();
+    }
 
     public RedisMetricsStorage(RedisUtil redisUtil) {
         this.redisUtil = redisUtil;

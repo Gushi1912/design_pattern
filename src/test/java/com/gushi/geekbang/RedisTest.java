@@ -1,6 +1,6 @@
 package com.gushi.geekbang;
 
-import com.gushi.common.RedisUtil;
+import com.gushi.common.util.RedisUtil;
 import org.junit.Test;
 
 /**

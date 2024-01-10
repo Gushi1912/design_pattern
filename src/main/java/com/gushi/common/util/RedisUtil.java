@@ -1,12 +1,10 @@
-package com.gushi.common;
+package com.gushi.common.util;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
 
 import java.io.*;
 import java.util.Properties;
-import java.util.ResourceBundle;
 
 /**
  * @Author Gushiyang
