@@ -46,6 +46,7 @@ public class RedisUtil {
 
     private InputStream readFromPath(String path) {
         InputStream inputStream;
+        //默认加载resources目录下的文件
         inputStream = RedisUtil.class.getClassLoader().getResourceAsStream(path);
         return inputStream;
     }

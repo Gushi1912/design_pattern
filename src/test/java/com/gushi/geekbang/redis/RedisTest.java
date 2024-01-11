@@ -1,4 +1,4 @@
-package com.gushi.geekbang;
+package com.gushi.geekbang.redis;
 
 import com.gushi.common.util.RedisUtil;
 import org.junit.Test;
