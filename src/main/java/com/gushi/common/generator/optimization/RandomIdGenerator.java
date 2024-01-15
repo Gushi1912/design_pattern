@@ -77,7 +77,8 @@ public class RandomIdGenerator implements  LogTraceIdGenerator{
             boolean isUppercase= randomAscii >= 'A' && randomAscii <= 'Z';
             boolean isLowercase= randomAscii >= 'a' && randomAscii <= 'z';
             if (isDigit|| isUppercase || isLowercase) {
-                randomChars[count] = (char) (randomAscii); ++count;
+                randomChars[count] = (char) (randomAscii);
+                ++count;
             }
         }
         return new String(randomChars);

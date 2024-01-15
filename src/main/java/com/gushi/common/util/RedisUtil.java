@@ -4,7 +4,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import java.io.*;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * @Author Gushiyang
@@ -64,4 +64,31 @@ public class RedisUtil {
             return jedis.get(key);
         }
     }
+
+    public void lPush(String key, String value) {
+        try (Jedis jedis = this.jedisPool.getResource()) {
+            jedis.lpush(key, value);
+        }
+    }
+
+    public List<String> lRange(String key, int i, int j) {
+        List<String> res;
+        try (Jedis jedis = this.jedisPool.getResource()) {
+            res = jedis.lrange(key, i, j);
+        }
+        return res;
+    }
+
+    public List<String> lRangeAll(String key) {
+        return lRange(key, 0 , -1);
+    }
+
+    public Set<String> keys() {
+        Set<String> res;
+        try (Jedis jedis = this.jedisPool.getResource()) {
+            res = jedis.keys("*");
+        }
+        return res;
+    }
+
 }

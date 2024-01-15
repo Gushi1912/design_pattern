@@ -16,9 +16,9 @@ public class Demo {
         IMetricsStorage storage = new RedisMetricsStorage();
         ConsoleReporter consoleReporter = new ConsoleReporter(storage);
         consoleReporter.startRepeatedReport(60, 60);
-        EmailReporter emailReporter = new EmailReporter(storage);
-        emailReporter.addToAddress("wangzheng@xzg.com");
-        emailReporter.startDailyReport();
+//        EmailReporter emailReporter = new EmailReporter(storage);
+//        emailReporter.addToAddress("wangzheng@xzg.com");
+//        emailReporter.startDailyReport();
         MetricsCollector collector = new MetricsCollector(storage);
         collector.recordRequest(new RequestInfo("register", 123, 10234));
         collector.recordRequest(new RequestInfo("register", 223, 11234));

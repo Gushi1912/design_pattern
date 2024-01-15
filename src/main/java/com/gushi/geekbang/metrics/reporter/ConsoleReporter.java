@@ -30,27 +30,24 @@ public class ConsoleReporter {
 
     //定时执行
     public void startRepeatedReport(long periodInSeconds, long durationInSeconds) {
-        executorService.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                //给定指定时间区间，从数据库中拉取数据
-                long durationInMillis = durationInSeconds * 1000;
-                long endTimeInMillis = System.currentTimeMillis();
-                long startTimeInMillis = endTimeInMillis -durationInMillis;
-                Map<String, List<RequestInfo>> requestInfos = metricsStorage.getRequestInfos(startTimeInMillis, endTimeInMillis);
-                Map<String, RequestStat> stats = new HashMap<>();
-                for (Map.Entry<String, List<RequestInfo>> entry : requestInfos.entrySet()) {
-                    String apiName = entry.getKey();
-                    List<RequestInfo> requestInfosPerApi = entry.getValue();
-                    //根据原始数据，计算得到统计数据
-                    RequestStat requestStat = Aggregator.aggregate(requestInfosPerApi, durationInMillis);
-                    stats.put(apiName, requestStat);
-                }
-                //将统计数据显示到终端
-                System.out.println("Time Span: [" + startTimeInMillis + ","  + endTimeInMillis + "]");
-                Gson gson = new Gson();
-                System.out.println(gson.toJson(stats));
+        executorService.scheduleAtFixedRate(() -> {
+            //给定指定时间区间，从数据库中拉取数据
+            long durationInMillis = durationInSeconds * 1000;
+            long endTimeInMillis = System.currentTimeMillis();
+            long startTimeInMillis = endTimeInMillis -durationInMillis;
+            Map<String, List<RequestInfo>> requestInfos = metricsStorage.getRequestInfos(startTimeInMillis, endTimeInMillis);
+            Map<String, RequestStat> stats = new HashMap<>();
+            for (Map.Entry<String, List<RequestInfo>> entry : requestInfos.entrySet()) {
+                String apiName = entry.getKey();
+                List<RequestInfo> requestInfosPerApi = entry.getValue();
+                //根据原始数据，计算得到统计数据
+                RequestStat requestStat = Aggregator.aggregate(requestInfosPerApi, durationInMillis);
+                stats.put(apiName, requestStat);
             }
+            //将统计数据显示到终端
+            System.out.println("Time Span: [" + startTimeInMillis + ","  + endTimeInMillis + "]");
+            Gson gson = new Gson();
+            System.out.println(gson.toJson(stats));
         }, 0, periodInSeconds, TimeUnit.SECONDS);
     }
 }
